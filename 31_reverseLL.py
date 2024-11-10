@@ -35,7 +35,7 @@ def print_linked_list(head):
 
 elements = list(map(int, input("Enter elements of your linked list (space-separated): ").split()))
 head = create_linked_list(elements)
-sol = Solution()
+sol = Solution() 
 new_head = sol.reverseList(head)
 print("Linked list reversed:")
 print_linked_list(new_head)
