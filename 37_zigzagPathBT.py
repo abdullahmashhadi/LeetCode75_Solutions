@@ -1,5 +1,4 @@
-
-from typing import Optional       
+from typing import Optional
 # Definition for a binary tree node.
 class TreeNode:
     def __init__(self, val=0, left=None, right=None):
@@ -7,24 +6,22 @@ class TreeNode:
         self.left = left
         self.right = right
 class Solution:
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        self.paths=0
-        def dfs(node):
+    def longestZigZag(self, root: Optional[TreeNode]) -> int:
+        self.zigzag=0
+        def dfs(node,direction,length):
             if not node:
                 return
-            checkPath(node,targetSum)
-            dfs(node.left)
-            dfs(node.right)
-        def checkPath(node, currentSum):
-            if not node:
-                return
-            if node.val==currentSum:
-                self.paths+=1
-            checkPath(node.left,currentSum-node.val)
-            checkPath(node.right, currentSum-node.val)
-        dfs(root)
-        return self.paths
-
+            self.zigzag=max(self.zigzag,length)
+            if direction=='left':
+                dfs(node.left,'right',length+1)
+                dfs(node.right,'left',1)
+            else:
+                dfs(node.right,'left',length+1)
+                dfs(node.left,'right',1)
+        dfs(root,'left',0)
+        dfs(root,'right',0)
+        return self.zigzag
+    
 def build_tree(values: list[Optional[int]]) -> Optional[TreeNode]:
     if not values or values[0] is None:
         return None
@@ -58,7 +55,6 @@ tree_values = [
 ]
 
 root=build_tree(tree_values)
-targetSum=int(input("Enter the target sum: "))
 sol=Solution()
-output=sol.pathSum(root, targetSum)
-print(f"The number of paths in the tree: {tree_values}, where the sum of the values along the path equals {targetSum} is: {output}")
+output=sol.longestZigZag(root)
+print(f"The longest zigzag path in the tree: {tree_values} is: {output}")
