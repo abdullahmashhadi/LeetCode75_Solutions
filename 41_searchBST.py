@@ -7,17 +7,24 @@ class TreeNode:
         self.right = right
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        queue=[]
-        queue.append(root)
-        while queue:
-            node=queue.pop(0)
-            if node.val==val:
-                return node
-            if node.left:
-                queue.append(node.left)
-            if node.right:
-                queue.append(node.right)
-        return None
+        # queue=[]
+        # queue.append(root)
+        # while queue:
+        #     node=queue.pop(0)
+        #     if node.val==val:
+        #         return node
+        #     if node.left:
+        #         queue.append(node.left)
+        #     if node.right:
+        #         queue.append(node.right)
+        # return None
+        if not root:
+            return
+        if root.val>val:
+            root=self.searchBST(root.left, val)
+        elif root.val<val:
+            root=self.searchBST(root.right, val)
+        return root
             
 def build_tree(values: list[Optional[int]]) -> Optional[TreeNode]:
     if not values or values[0] is None:
