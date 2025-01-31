@@ -42,16 +42,15 @@ class Solution:
     def gcdOfStrings(self, str1: str, str2: str) -> str:
         smaller=str2 if len(str2)<len(str1) else str1
         larger=str1 if len(str1)>len(str2) else str2
-        small_length=len(smaller)
-        big_length=len(larger)
-        found=False
         gcd_string=""
         for i in range (len(smaller)):
             prefix=smaller[0:i+1]
-            print(prefix)
             if prefix*int((len(larger)/len(prefix)))==larger and prefix*int((len(smaller)/len(prefix)))==smaller:
                     gcd_string=prefix
         return gcd_string
+
+        
+        
 
         
         
